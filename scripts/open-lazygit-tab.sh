@@ -6,10 +6,28 @@ set -uo pipefail
 
 herdr_bin="${HERDR_BIN_PATH:-herdr}"
 
+# Root lazygit at the invoking pane's directory, not the plugin install dir
+# (herdr starts pane commands from the plugin root). Context JSON is injected
+# by herdr on action invoke; fall back to the focused pane's cwd, then HOME.
+target_cwd() {
+  local cwd=""
+  if command -v jq >/dev/null 2>&1; then
+    cwd="$(printf '%s' "${HERDR_PLUGIN_CONTEXT_JSON:-}" | jq -r '
+      (.focused_pane_cwd // .workspace_cwd // .cwd // "")' 2>/dev/null)" || cwd=""
+    if [ -z "$cwd" ]; then
+      cwd="$("$herdr_bin" pane list 2>/dev/null | jq -r '
+        [.result.panes[]? | select(.focused == true)][0].cwd // ""' 2>/dev/null)" || cwd=""
+    fi
+  fi
+  [ -d "$cwd" ] || cwd="$HOME"
+  printf '%s' "$cwd"
+}
+
 open_tab() {
   exec "$herdr_bin" plugin pane open \
     --plugin herdr-lazygit --entrypoint lazygit \
-    --placement tab --focus
+    --placement tab --focus \
+    --cwd "$(target_cwd)"
 }
 
 command -v jq >/dev/null 2>&1 || open_tab
