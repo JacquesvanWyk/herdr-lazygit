@@ -1,0 +1,24 @@
+id = "herdr-lazygit"
+name = "herdr-lazygit"
+version = "0.1.0"
+description = "Open lazygit in a herdr split pane or tab, with smart toggle."
+min_herdr_version = "0.7.0"
+platforms = ["linux", "macos"]
+
+[[panes]]
+id = "lazygit"
+title = "lazygit"
+placement = "split"
+command = ["lazygit"]
+
+[[actions]]
+id = "open-lazygit"
+title = "Open lazygit"
+description = "Toggle lazygit in a split pane (open / focus / close)."
+command = ["bash", "scripts/open-lazygit.sh"]
+
+[[actions]]
+id = "open-lazygit-tab"
+title = "Open lazygit (tab)"
+description = "Toggle lazygit in its own tab (open / switch / close)."
+command = ["bash", "scripts/open-lazygit-tab.sh"]
