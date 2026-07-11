@@ -7,8 +7,14 @@ Requires herdr ≥ 0.7.0, `lazygit`, and `jq` (without jq the shortcut still ope
 ## Install
 
 ```bash
-herdr plugin link /path/to/herdr-lazygit
+herdr plugin install JacquesvanWyk/herdr-lazygit
 herdr plugin list   # confirm herdr-lazygit is registered
+```
+
+For local development:
+
+```bash
+herdr plugin link /path/to/herdr-lazygit
 ```
 
 ## Keybindings
