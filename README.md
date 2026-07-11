@@ -2,6 +2,14 @@
 
 Open [lazygit](https://github.com/jesseduffield/lazygit) in a herdr split pane or its own tab, with smart toggle: press once to open, again to focus, and again (while focused) to close. Quitting lazygit (`q`) closes the pane.
 
+**Split pane** (`prefix+l`) — lazygit beside your work:
+
+![lazygit in a herdr split pane](docs/split-pane.jpeg)
+
+**Own tab** (`prefix+shift+l`) — full-window lazygit:
+
+![lazygit in its own herdr tab](docs/tab.png)
+
 Requires herdr ≥ 0.7.0, `lazygit`, and `jq` (without jq the shortcut still opens lazygit, it just loses the toggle).
 
 ## Install
