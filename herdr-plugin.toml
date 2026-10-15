@@ -3,7 +3,7 @@ name = "herdr-lazygit"
 version = "0.1.0"
 description = "Open lazygit in a herdr split pane or tab, with smart toggle."
 min_herdr_version = "0.7.0"
-platforms = ["linux", "macos"]
+platforms = ["linux", "macos", "windows"]
 
 [[panes]]
 id = "lazygit"
@@ -15,10 +15,30 @@ command = ["lazygit"]
 id = "open-lazygit"
 title = "Open lazygit"
 description = "Toggle lazygit in a split pane (open / focus / close)."
+platforms = ["linux", "macos"]
 command = ["bash", "scripts/open-lazygit.sh"]
 
 [[actions]]
 id = "open-lazygit-tab"
 title = "Open lazygit (tab)"
 description = "Toggle lazygit in its own tab (open / switch / close)."
+platforms = ["linux", "macos"]
 command = ["bash", "scripts/open-lazygit-tab.sh"]
+
+# On Windows `bash` resolves to the WSL launcher, where neither `herdr` nor jq are
+# reachable, so Windows gets the PowerShell twin of the same toggle. Herdr rejects a
+# duplicate action id even across platforms, hence the `-windows` suffix.
+
+[[actions]]
+id = "open-lazygit-windows"
+title = "Open lazygit"
+description = "Toggle lazygit in a split pane (open / focus / close)."
+platforms = ["windows"]
+command = ["powershell", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "scripts/open-lazygit.ps1", "-Placement", "split"]
+
+[[actions]]
+id = "open-lazygit-tab-windows"
+title = "Open lazygit (tab)"
+description = "Toggle lazygit in its own tab (open / switch / close)."
+platforms = ["windows"]
+command = ["powershell", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "scripts/open-lazygit.ps1", "-Placement", "tab"]

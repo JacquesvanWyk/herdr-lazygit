@@ -12,6 +12,8 @@ Open [lazygit](https://github.com/jesseduffield/lazygit) in a herdr split pane o
 
 Requires herdr ≥ 0.7.0, `lazygit`, and `jq` (without jq the shortcut still opens lazygit, it just loses the toggle).
 
+On **Windows** it needs only `lazygit` and PowerShell: the actions `open-lazygit-windows` and `open-lazygit-tab-windows` run `scripts/open-lazygit.ps1`, a PowerShell twin of the same toggle that needs neither `bash` nor `jq`. (A bare `bash` on Windows is the WSL launcher, which can't reach `herdr`, and herdr rejects a duplicate action id even across platforms, hence the `-windows` suffix.) Use those two ids in the keybindings and commands below.
+
 ## Install
 
 ```bash
